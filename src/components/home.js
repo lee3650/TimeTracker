@@ -1,6 +1,6 @@
 import './home.css'
 import clockimg from './clockimg.jpg'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import CodeBlock from './codeblock'
 import { Link } from 'react-router-dom'
 import Spinner from './Spinner'
@@ -15,6 +15,10 @@ export const Homepage = (props) => {
 
     const setLoadFalse = () => setload(false)
     const onLoad = () => {setTimeout(setLoadFalse, 500); console.log('on load!')}
+
+    useEffect(() => {
+        document.title = '🕑 Time Tracker';
+    }, []);
 
     return (<> {loading && <Spinner/>} 
             <div className='rootdiv'>
