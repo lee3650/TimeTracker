@@ -1,13 +1,29 @@
+import './components/fonts.css'
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Homepage } from './components/home';
+import ExamplePage from './components/ExamplePage';
+import ErrorPage from './components/errorpage';
+
+const router = createBrowserRouter([
+  {
+    path: "/", 
+    element: <Homepage/>, 
+    errorElement: <ErrorPage/>, 
+  }, 
+  {
+    path: "/example", 
+    element: <ExamplePage/>, 
+  }
+]); 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

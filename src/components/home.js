@@ -1,6 +1,8 @@
 import './home.css'
 import clockimg from './clockimg.jpg'
 import { useRef } from 'react'
+import CodeBlock from './codeblock'
+import { Link } from 'react-router-dom'
 
 export const Homepage = (props) => {
 
@@ -26,29 +28,93 @@ export const Homepage = (props) => {
                     </div>
                 </div>
             </div>
-            <span className='dot top left'/>
-            <a className='bottom left cleanLink lightText textCenter' href="https://www.freepik.com/free-vector/flat-hand-drawn-time-management-concept-with-couple_12067480.htm#query=time%20management&position=18&from_view=search&track=ais">
+            <span className='dot top left absolute'/>
+            <a className='bottom left cleanLink lightText textCenter absolute' href="https://www.freepik.com/free-vector/flat-hand-drawn-time-management-concept-with-couple_12067480.htm#query=time%20management&position=18&from_view=search&track=ais">
             .    _         Image by Freepik {/* TODO */}
             </a>
-            <span className='dot bottom left'/>
-            <span className='dot bottom right onTop'/>
-            <div className='top right onTop'>
+            <span className='dot bottom left absolute'/>
+            <span className='dot bottom right onTop absolute'/>
+            <div className='top right onTop absolute'>
                 <a href='https://paypal.me/isaaclee58?country.x=US&locale.x=en_US' className='interFont boldText largeText cleanLink'>Donate ❤</a>
                 <br/>
                 <span/>
                 <a href='https://github.com/lee3650/TimeTracker' className='interFont largeText cleanLink lightText'>github</a>
             </div>
             {/* Start the "how it works" section */}
-            <div>
-                <h1 ref={tutRef}>
+            <div className='tutorialDiv'>
+                <h1 ref={tutRef} className='massiveText'>
                     How it works
                 </h1>
-                <p>
+                <h2 className='extraLargeText'>
                     1. Create a text file 
-                </p>
-                <p>
+                </h2>
+                <h2 className='extraLargeText'>
                     2. Declare activities
+                </h2>
+                <p className='interFont lightText'>
+                    Declare the activities you're interested in tracking using the syntax “Activity: Activity name”. 
                 </p>
+                <div className='codeBlock relative'>
+                    <p className='courierFont white'>
+                        Activity: Web development
+                    </p>
+                    <p className='inter white absolute right topHigh'>
+                        timetracking.md
+                    </p>
+                </div>
+                <h2 className='extraLargeText'>
+                    3. Track activities
+                </h2>
+                <p className='interFont lightText'>
+                    First, type the date in the format “### YYYY/MM/DD”. Then, type the name and activity using the format `HH:MM [AM | PM] - HH:MM [AM | PM], activity name`. 
+                </p>
+                <div className='codeBlock relative'>
+                    <p className='courierFont white'>
+                        Activity: Web development
+                    </p>
+                    <p className='courierFont white'>
+                        ### 2023/05/19
+                    </p>
+                    <p className='courierFont white'>
+                    9:30 AM - 11:30 AM, web development // case insensitive
+                    </p>
+                    <p className='inter white absolute right topHigh'>
+                        timetracking.md
+                    </p>
+                </div>
+                <h2 className='extraLargeText'>
+                    4. Visualize data
+                </h2>
+                <p className='interFont lightText'>
+                    Upload the file on the main page, and see total times, streaks, and other stats for each activity you've declared. 
+                </p>
+                <Link to='/example' className='cleanLink interFont'>See an example</Link>
+                <br/>
+                <br/>
+                <CodeBlock filename='timetracking.md'>
+                    <p className='courierFont white'>
+                        Activity: Web development
+                    </p>
+                    <p className='courierFont white'>
+                        Activity: write; Rest Days: Mon, Wed // rest days don't affect streak
+                    </p>
+                    <p className='courierFont white'>
+                        ### 2023/05/19
+                    </p>
+                    <p className='courierFont white'>
+                    9:30 AM - 11:30 AM, web development // case insensitive
+                    </p>
+                    <p className='courierFont white'>
+                    11:45 AM - 2:12 PM, write
+                    </p>
+                    <p className='courierFont white'>
+                    ### 2023/05/18
+                    </p>
+                    <p className='courierFont white'>
+                        9:17 AM - 11:15 AM, web development
+                    </p>
+                </CodeBlock>
+                <br></br>
             </div>
         </div>
     )

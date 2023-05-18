@@ -1,3 +1,12 @@
+export class ActivityData {
+    constructor(startDate, endDate, fileName, stats) {
+        this.startDate = startDate
+        this.endDate = endDate 
+        this.fileName = fileName
+        this.stats = stats
+    }
+}
+
 export class ActivityStats {
     constructor(name, totalTime, streak, bestStreak, timePerDay, bestDayString)
     {
