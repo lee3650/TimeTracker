@@ -6,7 +6,7 @@ export const Homepage = (props) => {
 
     const tutRef = useRef(null)
 
-    const scrollToRef = () => tutRef.current.scrollIntoView() 
+    const scrollToRef = () => tutRef.current.scrollIntoView({ behavior: 'smooth'}) 
 
     return (
         <div className='rootdiv'>
@@ -28,7 +28,7 @@ export const Homepage = (props) => {
             </div>
             <span className='dot top left'/>
             <a className='bottom left cleanLink lightText textCenter' href="https://www.freepik.com/free-vector/flat-hand-drawn-time-management-concept-with-couple_12067480.htm#query=time%20management&position=18&from_view=search&track=ais">
-            .    _         Image by Freepik
+            .    _         Image by Freepik {/* TODO */}
             </a>
             <span className='dot bottom left'/>
             <span className='dot bottom right onTop'/>
