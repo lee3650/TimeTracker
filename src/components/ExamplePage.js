@@ -1,3 +1,4 @@
+import './home.css'
 import DataDisplay from "./DataDisplay";
 
 // constructor(name, totalTime, streak, bestStreak, timePerDay, bestDayString)
@@ -27,7 +28,10 @@ const data = {
 }
 
 const ExamplePage = (props) => {
-    return (<DataDisplay data={data}/>); 
+    return (<><div className='fade-in'>
+        Testing text 
+        </div>
+        <DataDisplay data={data}/></>); 
 }
 
 export default ExamplePage; 

@@ -1,21 +1,27 @@
 import './home.css'
 import clockimg from './clockimg.jpg'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import CodeBlock from './codeblock'
 import { Link } from 'react-router-dom'
+import Spinner from './Spinner'
 
 export const Homepage = (props) => {
 
     const tutRef = useRef(null)
 
+    const [loading, setload] = useState(true)
+
     const scrollToRef = () => tutRef.current.scrollIntoView({ behavior: 'smooth'}) 
 
-    return (
-        <div className='rootdiv'>
-            <div className='homediv'>
+    const setLoadFalse = () => setload(false)
+    const onLoad = () => {setTimeout(setLoadFalse, 500); console.log('on load!')}
+
+    return (<> {loading && <Spinner/>} 
+            <div className='rootdiv'>
+            <div className={'homediv' + (loading ? '' : ' fade-in')}>
                 <div className='flexdiv'>
                     <div className='textParent'>
-                        <h1 className='titleText'>Time Tracker</h1>
+                        <h1 className='titleText' rel='preload'>Time Tracker</h1>
                         <p className='copyText'>Track your time declaratively using plain text files. Upload your time data files and visualize them with time tracker. Free and open source, forever.</p>
                         <div className='buttonParent'>
                             <button className='button colorPurple'>Upload file</button>
@@ -24,22 +30,20 @@ export const Homepage = (props) => {
                         </div>
                     </div>
                     <div className='imagediv'>
-                        <img src={clockimg} alt='clock graphic' className='image'/>
+                        <img onLoad={onLoad} src={clockimg} alt='clock graphic' className='image'/>
                     </div>
                 </div>
             </div>
-            <span className='dot top left absolute'/>
-            <a className='bottom left cleanLink lightText textCenter absolute' href="https://www.freepik.com/free-vector/flat-hand-drawn-time-management-concept-with-couple_12067480.htm#query=time%20management&position=18&from_view=search&track=ais">
-            .    _         Image by Freepik {/* TODO */}
-            </a>
-            <span className='dot bottom left absolute'/>
-            <span className='dot bottom right onTop absolute'/>
-            <div className='top right onTop absolute'>
+            {loading ? null : <div className='top right onTop absolute'>
                 <a href='https://paypal.me/isaaclee58?country.x=US&locale.x=en_US' className='interFont boldText largeText cleanLink'>Donate ❤</a>
                 <br/>
                 <span/>
                 <a href='https://github.com/lee3650/TimeTracker' className='interFont largeText cleanLink lightText'>github</a>
-            </div>
+                <br/>
+                <a className='left largeText cleanLink lightText' href="https://www.freepik.com/free-vector/flat-hand-drawn-time-management-concept-with-couple_12067480.htm#query=time%20management&position=18&from_view=search&track=ais">
+                freepik
+                </a>
+            </div>}
             {/* Start the "how it works" section */}
             <div className='tutorialDiv'>
                 <h1 ref={tutRef} className='massiveText'>
@@ -116,6 +120,7 @@ export const Homepage = (props) => {
                 </CodeBlock>
                 <br></br>
             </div>
-        </div>
+        </div>)
+    </>
     )
 }

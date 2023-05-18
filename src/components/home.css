@@ -72,9 +72,12 @@
     border: 0px;
 }
 
+.button:hover {
+    transform: scale(1.02); 
+}
+
 .button:active {
     padding-top: 5px;
-    transform: scale(0.98); 
     transform: translateY(4px); 
 }
 
@@ -180,4 +183,13 @@
 
 .white {
     color: white; 
+}
+
+.fade-in {
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
