@@ -9,7 +9,7 @@ const data = {
     fileName: 'exampletracking.md', 
     stats: [
         {
-            name: 'Gamedev', 
+            name: 'Development', 
             totalTime: 16.8, 
             streak: 7, 
             bestStreak: 5, 
@@ -28,10 +28,9 @@ const data = {
 }
 
 const ExamplePage = (props) => {
-    return (<><div className='fade-in'>
-        Testing text 
-        </div>
-        <DataDisplay data={data}/></>); 
+    return (<>
+        <DataDisplay data={data} />
+    </>);
 }
 
 export default ExamplePage; 

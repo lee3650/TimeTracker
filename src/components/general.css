@@ -1,7 +1,87 @@
 .inter {
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
 }
 
 .courier {
     font-family: 'Courier New', Courier, monospace;
+}
+
+.centerDiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.leftDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 35vw;
+}
+
+.lightText {
+    font-weight: lighter;
+}
+
+.normalText {
+    font-weight: normal;
+}
+
+.top {
+    top: 10px; 
+}
+
+.left {
+    left: 10px;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.cleanLink {
+    text-decoration: none;
+    color: black; 
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.fade-in {
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.square {
+    width: 30px;
+    height: 30px;
+}
+
+.color1 {
+    background-color: #4A4063;
+}
+
+.color2 {
+    background-color: #5C6B73;
+}
+
+.color3 {
+    background-color: #DFA06E;
+}
+
+.color4 {
+    background-color: #F5F3BB;
+}
+
+.color5 {
+    background-color: #2CA58D;
+}
+
+.marginBottom {
+    margin-bottom: 50px;
 }

@@ -96,7 +96,7 @@ export const Homepage = (props) => {
                 <p className='interFont lightText'>
                     Upload the file on the main page, and see total times, streaks, and other stats for each activity you've declared. 
                 </p>
-                <Link to='/example' className='cleanLink interFont'>See an example</Link>
+                <Link onClick={() => window.scroll(0,0)} to='/example' className='cleanLink interFont'>See an example</Link>
                 <br/>
                 <br/>
                 <CodeBlock filename='timetracking.md'>
