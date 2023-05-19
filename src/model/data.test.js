@@ -1,5 +1,15 @@
 const fs = require('fs')
-import { ParseActivities, ParseActivityEntry, parseActivityDefinition} from "./data"
+import { ParseActivities, ParseActivityEntry, parseActivityDefinition, FindLastDate} from "./data"
+
+test('last date is found', () => {
+    const input = fs.readFileSync('./src/model/test_log.md', 'utf-8')
+    
+    const output = FindLastDate(input)
+
+    expect(output.getFullYear()).toBe(2023)
+    expect(output.getMonth()).toBe(5)
+    expect(output.getDate()).toBe(17)
+})
 
 test('activity entries are parsed correctly', () => {
     const input = "11:10 AM - 11:40 AM, time tracker project // fixing the mockup\n"

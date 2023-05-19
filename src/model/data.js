@@ -117,11 +117,11 @@ export const FindFirstDate = (string) => {
 export const FindLastDate = (string) => {
     const lines = string.split('\n')
 
-    lines.forEach(el => {
-        if (getLineType(el) === 'day') {
-            return ParseDay(removeWhitespace(el))
+    for (let i = 0; i < lines.length; i++) {
+        if (getLineType(lines[i]) === 'day') {
+            return ParseDay(lines[i])
         }
-    })
+    }
 
     return null
 }
@@ -359,6 +359,10 @@ const ParseDays = (stringArray) => {
         }
         else if (getLineType(stringArray[i]) === 'entry') {
             const entry = ParseActivityEntry(stringArray[i])
+
+            if (entry == null) {
+                continue
+            }
 
             const label = entry.label.toLowerCase()
 
