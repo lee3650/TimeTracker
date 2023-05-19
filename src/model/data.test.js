@@ -1,5 +1,5 @@
 const fs = require('fs')
-import { ParseActivities, ParseActivityEntry } from "./data";
+import { ParseActivities, ParseActivityEntry, parseActivityDefinition} from "./data"
 
 test('activity entries are parsed correctly', () => {
     const input = "11:10 AM - 11:40 AM, time tracker project // fixing the mockup\n"
@@ -10,8 +10,29 @@ test('activity entries are parsed correctly', () => {
     expect(activityEntry.label).toBe('time tracker project')
 })
 
+test('can parse activity definition', () => {
+    const input = "Activity: testing; Rest Days: Mon, Tues, Wed\n"
+
+    const def = parseActivityDefinition(input)
+
+    expect(def.label).toBe('testing')
+    expect(def.restDays).toContain(0)
+    expect(def.restDays).toContain(1)
+    expect(def.restDays).toContain(2)
+
+})
+
 test('activity entry length is correct with wraparound', () => {
     const input = "11:30 AM - 12:30 PM, gamedev\n"
+
+    const entry = ParseActivityEntry(input)
+
+    expect(entry.length).toBeCloseTo(1)
+    expect(entry.label).toBe('gamedev')
+})
+
+test('activity entry is parsed with single digit times', () => {
+    const input = "1:30 AM - 2:30 PM, gamedev\n"
 
     const entry = ParseActivityEntry(input)
 
@@ -41,7 +62,7 @@ test('activities are parsed correctly', () => {
 
     const reading = output[2]
 
-    expect(reading.name).toBe('gamedev')
-    expect(reading.totalTime).toBeCloseTo(1.5)
+    expect(reading.name).toBe('reading')
+    expect(reading.totalTime).toBeCloseTo(1.25)
     expect(reading.streak).toBe(2)
 })

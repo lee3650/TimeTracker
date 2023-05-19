@@ -1,11 +1,15 @@
+import { useNavigate } from 'react-router-dom'
 import './home.css'
 import clockimg from './clockimg.jpg'
 import { useRef, useState, useEffect } from 'react'
 import CodeBlock from './codeblock'
 import { Link } from 'react-router-dom'
 import Spinner from './Spinner'
+import { ParseActivityData } from '../model/data'
 
 export const Homepage = (props) => {
+
+    const navigate = useNavigate()
 
     const tutRef = useRef(null)
 
@@ -20,6 +24,22 @@ export const Homepage = (props) => {
         document.title = '🕑 Time Tracker';
     }, []);
 
+    const processData = event => {
+        const file = event.target.files[0]
+        console.log(event.target.files[0])
+        const filename = file.name
+        setload(true)
+
+        const reader = new FileReader() 
+        reader.onload = async (e) => {
+            const text = (e.target.result)
+            const data = ParseActivityData(text, filename)
+            navigate('/view', {state: data})
+        }
+
+        reader.readAsText(file)
+    }
+
     return (<> {loading && <Spinner/>} 
             <div className='rootdiv'>
             <div className={'homediv' + (loading ? '' : ' fade-in')}>
@@ -28,7 +48,8 @@ export const Homepage = (props) => {
                         <h1 className='titleText' rel='preload'>Time Tracker</h1>
                         <p className='copyText'>Track your time declaratively using plain text files. Upload your time data files and visualize them with time tracker. Free and open source, forever.</p>
                         <div className='buttonParent'>
-                            <button className='button colorPurple'>Upload file</button>
+                            <label htmlFor="file-upload" className='button colorPurple'><p className='textCenter'>Choose file</p></label>
+                            <input id='file-upload' type='file' onChange={processData} className='hidden'/>
                             <br />
                             <button className='button colorGreen' onClick={scrollToRef}>How it works</button>
                         </div>

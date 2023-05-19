@@ -43,12 +43,25 @@ class Day {
 
     getTime(activityName)
     {
-        if (activityLogs[activityName])
+        if (this.activityLogs[activityName])
         {
-            return activityLogs[activityName]
+            return this.activityLogs[activityName]
         }
         return 0
     }
+
+    getDay() {
+        return this.date.getDay() 
+    }
+}
+
+export const ParseActivityData = (string, filename) => {
+    const startDay = FindFirstDate(string)
+    const endDay = FindLastDate(string) 
+
+    const stats = ParseActivities(string)
+
+    return new ActivityData(formatDate(startDay), formatDate(endDay), filename, stats)
 }
 
 export const ParseActivities = (string) => {
@@ -57,37 +70,228 @@ export const ParseActivities = (string) => {
     const activity_defs = []
 
     lines.forEach((element) => {
-        if (getLineType(element) == 'activity') {
+        if (getLineType(element) === 'activity') {
             activity_defs.push(parseActivityDefinition(element))
         }
     });
 
+    // days = array of type day 
     const days = ParseDays(lines)
+
+    console.log('Parsed activity definitions: ' + JSON.stringify(activity_defs))
+    console.log('parsed days: ' + JSON.stringify(days))
 
     const activities = []
 
     activity_defs.forEach(element => {
-        activities.push(ParseActivity(element, days))
+        const parsedAct = ParseActivity(element, days)
+        activities.push(parsedAct)
     })
 
-    activities.sort((a, b) => a.totalTime - b.totalTime)
+    activities.sort((a, b) => b.totalTime - a.totalTime)
+
+    console.log('Final activities: ' + JSON.stringify(activities))
 
     return activities
 }
 
-const ParseActivity = (activity_def, days) => {
+export const FindFirstDate = (string) => {
+    const lines = string.split('\n')
 
+    let lastDayStr = ""
+
+    lines.forEach(el => {
+        if (getLineType(el) === 'day') {
+            lastDayStr = el
+        }
+    })
+
+    if (lastDayStr === "") {
+        return null 
+    }
+
+    // first day should be the last day we find 
+    return ParseDay(lastDayStr)
 }
 
-const activityPattern = /.*/
-const dayPattern = /.*/
-const entryPattern = /.*/
+export const FindLastDate = (string) => {
+    const lines = string.split('\n')
 
-const parseActivityDefinition = (string) => {
+    lines.forEach(el => {
+        if (getLineType(el) === 'day') {
+            return ParseDay(removeWhitespace(el))
+        }
+    })
 
+    return null
+}
+
+const ParseDay = (string) => {
+    string = removeWhitespace(string)
+
+    console.log('parsing day: ' + string)
+
+    const datePattern = /(\d\d\d\d)(\/)(\d\d)(\/)(\d\d)/
+    // year = match 0 
+    // month = match 1
+    // day = match 2
+
+    const matches = datePattern.exec(string)
+
+    console.log('day matches: ' + JSON.stringify(matches))
+
+    if (matches.length < 6) {
+        return null
+    }
+
+    const year = Number(matches[1]) 
+    const month = Number(matches[3]) 
+    const day = Number(matches[5]) 
+
+    return new Date(year, month, day)
+}
+
+const ParseActivity = (activity_def, days) => {
+    // so, we have all the Day objects and the given activity definition 
+    // so this should be fairly easy 
+    // result: constructor(name, totalTime, streak, bestStreak, timePerDay, bestDayString)
+    // day: constructor(date, activityLogs)
+    // activity def: label, restDays : int[] 
+    // constructor (label, restDays) 
+
+    // we also have ComputeStreak() 
+
+    if (days.length === 0) {
+        return new ActivityStats(activity_def.label, 0, 0, 0, 0, 'n/a')
+    }
+
+    let totalTime = 0
+
+    let bestDay = 0
+    let bestDayIndex = -1
+
+    for (let i = days.length - 1; i >= 0; i--) {
+        const curTime = days[i].getTime(activity_def.label.toLowerCase())
+
+        totalTime += curTime
+
+        if (curTime > bestDay) {
+            bestDay = curTime
+            bestDayIndex = i
+        }
+    }
+
+    const timePerDay = totalTime / days.length 
+    let bestDayStr = 'n/a'
+
+    if (bestDayIndex >= 0) {
+        bestDayStr = formatDate(days[bestDayIndex].date)
+    }
+
+    const curStreak = ComputeStreak(activity_def.label, activity_def.restDays, days)
+    const bestStreak = ComputeBestStreak(activity_def.label, activity_def.restDays, days)
+
+    return new ActivityStats(activity_def.label, Number(totalTime).toFixed(2), curStreak, bestStreak, timePerDay, bestDayStr)
+}
+
+const formatDate = (date) => {
+    if (date === null) {
+        return ''
+    }
+
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    };
+
+    const formattedDate = date.toLocaleDateString('en-US', options);
+
+    return formattedDate 
+}
+
+const activityPattern = /[Aa]ctivity:.*/
+const dayPattern = /###\d\d\d\d\/\d\d\/\d\d/
+const entryPattern = /\d\d?:\d\d[AaPp][Mm].*/
+
+const removeComment = (string) => {
+    const comment = string.indexOf("//")
+    if (comment >= 0) {
+        string = string.slice(0, comment)
+    }
+    return string 
+}
+
+const removeExtraWhiteSpace = (string) => {
+    let result = ''
+    let prevWhite = true
+    for (let i = 0; i < string.length; i++) {
+        const whitespace = !notWhitespace(string[i])
+
+        if (notWhitespace(string[i]) || !prevWhite) { 
+            result += string[i]
+        } 
+        prevWhite = whitespace 
+    }
+
+    return result.trim()
+}
+
+export const parseActivityDefinition = (string) => {
+    string = removeComment(string)
+    string = removeExtraWhiteSpace(string)
+
+    const activityNamePattern = /([Aa]ctivity:)([^\n;]*)/
+
+    const matches = activityNamePattern.exec(string)
+
+    console.log('activity def matches: ' + JSON.stringify(matches))
+
+    if (matches.length < 2) {
+        return null 
+    }
+
+    // 2nd submatch 
+    const name = removeExtraWhiteSpace(matches[2]) 
+    string = string.toLowerCase()
+    string = removeWhitespace(string)
+    const restStart = string.indexOf('restdays:')
+
+    if (restStart < 0)
+    {
+        console.log('rest start was less than zero for string ' + string)
+        return new ActivityDefinition(name, [])
+    }
+
+    string = string.slice(restStart + 9)
+    const dayToInt = {
+        'mon': 0, 
+        'tues': 1, 
+        'tue': 1, 
+        'wed': 2, 
+        'thurs': 3, 
+        'thur': 3, 
+        'fri': 4, 
+        'sat': 5, 
+        'sun': 6, 
+    }
+
+    const dayMatch = /[^,\n]+/
+
+    console.log('finding all matches for string ' + string)
+
+    const dayStrs = getAllMatches(dayMatch, string, true)
+
+    console.log('rest day matches: ' + JSON.stringify(dayStrs))
+
+    const dayInts = dayStrs.map(v => dayToInt[v.trim()])
+
+    return new ActivityDefinition(name, dayInts)
 }
 
 const getLineType = (string) => {
+    string = removeWhitespace(string)
+
     if (entryPattern.test(string)) {
         return 'entry'
     }
@@ -101,19 +305,88 @@ const getLineType = (string) => {
     return 'unknown'
 }
 
-const ComputeStreak = (element, days) => {
+// days should be descending 
+export const ComputeStreak = (string_label, rest_days, days) => {
+    let streak = 0
 
+    for (let i = 0; i < days.length; i++) {
+        if (days[i].getTime(string_label) > 0) {
+            streak++ 
+        }
+        else {
+            if (i > 0 && !rest_days.includes(days[i].getDay())) {
+                break 
+            }
+        }
+    }
+
+    return streak 
+}
+
+export const ComputeBestStreak = (string_label, rest_days, days) => {
+    let streak = 0
+    let bestStreak = 0
+
+    for (let i = 0; i < days.length; i++) {
+        if (days[i].getTime(string_label) > 0) {
+            streak++ 
+            if (streak > bestStreak) {
+                bestStreak = streak
+            }
+        }
+        else {
+            if (rest_days.includes(days[i].getDay()))
+            streak = 0 
+        }
+    }
 }
 
 const ParseDays = (stringArray) => {
+    let curDay = null 
+    let timesOnDay = {} 
 
+    const days = [] 
+
+    for (let i = 0; i < stringArray.length; i++) {
+        if (getLineType(stringArray[i]) === 'day') {
+            if (curDay !== null) {
+                days.push(new Day(curDay, timesOnDay))
+            }
+            curDay = ParseDay(stringArray[i])
+            if (curDay == null) {
+            }
+            timesOnDay = {} 
+        }
+        else if (getLineType(stringArray[i]) === 'entry') {
+            const entry = ParseActivityEntry(stringArray[i])
+
+            const label = entry.label.toLowerCase()
+
+            if (timesOnDay[label]) {
+                timesOnDay[label] += entry.length
+            }
+            else {
+                timesOnDay[label] = entry.length
+            }
+        }
+    }
+
+    if (curDay != null) {
+        days.push(new Day(curDay, timesOnDay))
+    }
+
+    return days 
+}
+
+const notWhitespace = char => {
+    return char !== ' ' && char !== '\t' && char !== '\n' && char !== '\r' && char !== '\f'
 }
 
 const removeWhitespace = (string) => {
     let result = ""
     for (let i = 0; i < string.length; i++){
         const char = string[i]
-        if (char != ' ' && string[i] != '\t' && string[i] != '\n' && string[i] != '\r' && string[i] != '\f') {
+        if (notWhitespace(char)) {
             result += char
         }
     }
@@ -121,36 +394,40 @@ const removeWhitespace = (string) => {
     return result 
 }
 
-function getAllMatches(regex, string) {
+function getAllMatches(regex, string, withSubstr) {
   let matches = [];
   let match;
 
   while ((match = regex.exec(string)) !== null) {
+    // console.log('adding match: ' + match[0] + ', with substring: ' + withSubstr)
     matches.push(match[0]);
+    if (withSubstr) {
+        string = string.substring(match.index + match[0].length);
+    }
   }
 
   return matches;
 }
 
 export const ParseActivityEntry = (string) => {
-    if (getLineType(string) != 'entry') {
+    if (getLineType(string) !== 'entry') {
         console.log('line type was ' + getLineType(string) + ', returning')
         return null; 
     }
 
-    string = string.trim()
+    string = removeExtraWhiteSpace(string)
 
     // example: 10:16 AM - 10:30 AM, gamedev // with comment 
 
     // match start time, end time 
     // match name 
 
-    const timePattern = /[0-9][0-9]:[0-9][0-9][ \t]*[APap][ \t]*[Mm]/g
+    const timePattern = /[0-9]?[0-9]:[0-9][0-9][ \t]*[APap][ \t]*[Mm]/g
 
-    let times = getAllMatches(timePattern, string)
+    let times = getAllMatches(timePattern, string, false)
 
-    if (times == null || times.length != 2) {
-        console.log('times was null or did not have the correct length! Times was ' + JSON.stringify(times))
+    if (times === null || times.length !== 2) {
+        console.log('times was null or did not have the correct length! Times was ' + JSON.stringify(times) + ' for input ' + string)
         return null 
     }
 
@@ -161,7 +438,7 @@ export const ParseActivityEntry = (string) => {
 
     const m1 = findMeridian(t1)
 
-    if (m1 == null){
+    if (m1 === null){
         console.log('Could not find meridian from string ' + t1)
     }
 
@@ -177,7 +454,7 @@ export const ParseActivityEntry = (string) => {
     const labelPattern = /,(.*?)(\/\/|$)/
 
     const labelmatch = labelPattern.exec(string)
-    if (labelmatch == null || labelmatch.length < 2)
+    if (labelmatch === null || labelmatch.length < 2)
     {
         console.log('could not match label! label was ' + JSON.stringify(labelmatch))
         return null
@@ -192,16 +469,16 @@ export const ParseActivityEntry = (string) => {
 const parseTime = (string, prev_meridian) => {
     const numPattern = /\d+/g
 
-    const numbers = getAllMatches(numPattern, string)
+    const numbers = getAllMatches(numPattern, string, false)
 
-    if (numbers == null || numbers.length != 2) {
+    if (numbers === null || numbers.length !== 2) {
         return null
     }
 
     const meridian = findMeridian(string)
 
     let day = 15
-    if (prev_meridian == 'pm' && meridian == 'am') {
+    if (prev_meridian === 'pm' && meridian === 'am') {
         day = 16
     }
 
@@ -212,7 +489,7 @@ const findMeridian = (string) => {
     const meridianPattern = /[ap]m/
     const merid_exec = meridianPattern.exec(string)
 
-    if (merid_exec == null || merid_exec.length != 1) {
+    if (merid_exec === null || merid_exec.length !== 1) {
         return null
     }
     
