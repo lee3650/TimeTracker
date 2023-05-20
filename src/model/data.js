@@ -443,13 +443,14 @@ export const ParseActivityEntry = (string) => {
     // now we should have a string of the form [H]H:MM[am][pm]
 
     const m1 = findMeridian(t1)
+    const m2 = findMeridian(t2)
 
     if (m1 === null){
         console.log('Could not find meridian from string ' + t1)
     }
 
-    const day1 = parseTime(t1, 'am')
-    const day2 = parseTime(t2, m1) // needs to know the meridian of the first time to see if it wraps around 
+    const day1 = parseTime(t1, 'am', m1)
+    const day2 = parseTime(t2, m1, m2) // needs to know the meridian of the first time to see if it wraps around 
 
     if (!day1 || !day2) {
         console.log('could not parse day1 or day2!')
@@ -488,7 +489,13 @@ const parseTime = (string, prev_meridian) => {
         day = 16
     }
 
-    return new Date(2020, 9, day, parseInt(numbers[0]), parseInt(numbers[1]), 0, 0)
+    let hour = parseInt(numbers[0])
+
+    if (hour < 12 && meridian == 'pm') {
+        hour += 12 
+    }
+
+    return new Date(2020, 9, day, hour, parseInt(numbers[1]), 0, 0)
 }
 
 const findMeridian = (string) => {

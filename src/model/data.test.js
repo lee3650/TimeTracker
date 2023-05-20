@@ -20,6 +20,24 @@ test('activity entries are parsed correctly', () => {
     expect(activityEntry.label).toBe('time tracker project')
 })
 
+test.only('activity entries are parsed within PM', () => {
+    const input = "12:15 PM - 5:15 PM, testing"
+
+    const activityEntry = ParseActivityEntry(input) 
+
+    expect(activityEntry.length).toBeCloseTo(5)
+    expect(activityEntry.label).toBe('testing')
+})
+
+test.only('activity entries are parsed from AM to PM', () => {
+    const input = "11:00 AM - 5:15 PM, testing"
+
+    const activityEntry = ParseActivityEntry(input) 
+
+    expect(activityEntry.length).toBeCloseTo(6.25)
+    expect(activityEntry.label).toBe('testing')
+})
+
 test('can parse activity definition', () => {
     const input = "Activity: testing; Rest Days: Mon, Tues, Wed\n"
 
@@ -31,6 +49,16 @@ test('can parse activity definition', () => {
     expect(def.restDays).toContain(2)
 
 })
+
+test.only('activity entry length is correct between days', () => {
+    const input = '11:30 PM - 1:30 AM, gamedev\n'
+
+    const entry = ParseActivityEntry(input)
+
+    expect(entry.length).toBeCloseTo(2)
+    expect(entry.label).toBe('gamedev')
+
+}) 
 
 test('activity entry length is correct with wraparound', () => {
     const input = "11:30 AM - 12:30 PM, gamedev\n"

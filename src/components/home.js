@@ -116,7 +116,9 @@ export const Homepage = (props) => {
                 <p className='interFont lightText'>
                     Upload the file on the main page, and see total times, streaks, and other stats for each activity you've declared. 
                 </p>
-                <Link onClick={() => window.scroll(0,0)} to='/example' className='cleanLink interFont'>See an example</Link>
+                <Link onClick={() => window.scroll(0,0)} to='/example' className='cleanLink interFont'>🔍 See an example</Link>
+                <br/>
+                <a href='https://github.com/lee3650/TimeTracker' className='interFont cleanLink'>📖 Read more</a>
                 <br/>
                 <br/>
                 <CodeBlock filename='timetracking.md'>
@@ -143,6 +145,33 @@ export const Homepage = (props) => {
                     </p>
                 </CodeBlock>
                 <br></br>
+                <h1 className='massiveText'>
+                    What's the point? 
+                </h1>
+                <p className='interFont'>
+                I've tried different time tracking apps, 
+                but I prefer the simplicity and ease of editing of plain text files. 
+                <br/>
+                <br/>
+                If I forget to track an activity, no problem, just add a line with an estimate. 
+                Using text files to track time gives you complete control over your data and lets 
+                you fix any mistakes or errors easily.
+                <br/>
+                <br/>
+                Work uninterrupted: With text files, you don't need to be connected to the internet, and you don't need to use your phone to start timers. 
+                </p>
+                <h2 className='extraLargeText'>
+                Tips
+                </h2>
+                <p>
+                <ol className='interFont'>
+                    <li>Track a small number of activities. Tracking more than 4 activities takes too much effort for the benefit gained.</li>
+                    <br/>
+                    <li>Only track things you do on the computer. For things like running or workout out, there are dedicated apps that provide much better analytics and ease of use.</li>
+                    <br/>
+                    <li>Use github to backup and distribute your log file. Access it anywhere and prevent it from being lost.</li>
+                </ol>
+                </p>
             </div>
         </div>)
     </>
