@@ -2,6 +2,8 @@
 
 Track your time using declarative text files, which you own and control, then use this website to display the results and view statistics. 
 
+See it at www.declarativetime.com. 
+
 ### Syntax
 
 Declare an *activity* with `Activity: Activity_Name`. The site calculates a streak. You can set rest days in the activity name with `Activity: Activity_Name; Rest Days: Mon, Tues, Wed, ...` etc. 
@@ -16,7 +18,8 @@ Put the oldest day at the bottom and put newer days on top.
 
 Example file: 
 
-```timetracking.md
+```markdown
+
 Activity: Web development, Rest days: Sat, Sun 
 Activity: Reading
 Activity: Writing
