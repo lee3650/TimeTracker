@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Declarative Time Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Track your time using declarative text files, which you own and control, then use this website to display the results and view statistics. 
 
-## Available Scripts
+### Syntax
 
-In the project directory, you can run:
+Declare an *activity* with `Activity: Activity_Name`. The site calculates a streak. You can set rest days in the activity name with `Activity: Activity_Name; Rest Days: Mon, Tues, Wed, ...` etc. 
 
-### `npm start`
+You can include comments anywhere with `//`. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Start a new *day* with `### YYYY/MM/DD`. Any activity entries must be underneath a day. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Put the oldest day at the bottom and put newer days on top. 
 
-### `npm test`
+*Activity entries* take the form `HH:MM - HH:MM, activity_name`. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Example file: 
 
-### `npm run build`
+```timetracking.md
+Activity: Web development, Rest days: Sat, Sun 
+Activity: Reading
+Activity: Writing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2023/05/18 // newest day at the top, oldest at the bottom 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+7:45 AM - 9:15 AM, web development // case insensitive, but activity name must match declaration 
+10:15 AM - 11:00 AM, reading
+11:15 AM - 12:20 PM, writing 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2023/05/17
 
-### `npm run eject`
+9:15 AM - 10:15 AM, web development
+12:30 PM - 1:30 PM, writing
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 2023/05/16 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+8:30 AM - 9:45 AM, web development
+10:15 AM - 11:45 AM, reading 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
