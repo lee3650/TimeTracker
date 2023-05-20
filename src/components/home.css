@@ -201,3 +201,8 @@
 .topMargin {
     margin-top: 15px; 
 }
+
+.blackEmoji {
+    color: transparent; 
+    text-shadow: 0 0 0 black;
+}

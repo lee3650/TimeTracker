@@ -60,12 +60,11 @@ export const Homepage = (props) => {
                 </div>
             </div>
             {loading ? null : <div className='top right onTop absolute'>
-                <a href='https://paypal.me/isaaclee58?country.x=US&locale.x=en_US' className='interFont boldText largeText cleanLink'>Donate ❤</a>
-                <br/>
+                {/*<a href='https://paypal.me/isaaclee58?country.x=US&locale.x=en_US' className='interFont boldText largeText cleanLink'>Donate ❤</a> <br/> */}
                 <span/>
-                <a href='https://github.com/lee3650/TimeTracker' className='interFont largeText cleanLink lightText'>github</a>
+                <a href='https://github.com/lee3650/TimeTracker' className='interFont largeText cleanLink'>github <span className='blackEmoji'>⭐</span></a>
                 <br/>
-                <a className='left largeText cleanLink lightText' href="https://www.freepik.com/free-vector/flat-hand-drawn-time-management-concept-with-couple_12067480.htm#query=time%20management&position=18&from_view=search&track=ais">
+                <a className='left largeText cleanLink' href="https://www.freepik.com/free-vector/flat-hand-drawn-time-management-concept-with-couple_12067480.htm#query=time%20management&position=18&from_view=search&track=ais">
                 freepik
                 </a>
             </div>}

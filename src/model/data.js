@@ -339,6 +339,8 @@ export const ComputeBestStreak = (string_label, rest_days, days) => {
             streak = 0 
         }
     }
+
+    return bestStreak 
 }
 
 const ParseDays = (stringArray) => {

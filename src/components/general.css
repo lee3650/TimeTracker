@@ -85,3 +85,8 @@
 .marginBottom {
     margin-bottom: 50px;
 }
+
+.blackEmoji {
+    color: transparent; 
+    text-shadow: 0 0 0 black;
+}
