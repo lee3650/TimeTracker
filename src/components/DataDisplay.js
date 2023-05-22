@@ -12,7 +12,7 @@ const DataDisplay = (props) => {
         <div className='top left absolute'>
             <Link to={'/'} className='cleanLink bold inter'>Home</Link>
         </div>
-        <h1 className='inter'>
+        <h1 className='inter titleFont'>
             {data.startDate + ' - ' + data.endDate}
         </h1>
 

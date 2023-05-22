@@ -20,43 +20,117 @@
     background-color: rgba(255, 255, 255, 0);
 }
 
-.titleText {
-    font-family: 'Inter';
-    font-size: 550%;
-    font-weight: bold;
-    text-align: center;
-    padding-top: 15%;
-    padding-left: 20%;
-    margin-bottom: 0%;
+/* Fullscreen */ 
+@media only screen and (min-width: 801px) {
+    .titleText {
+        font-family: 'Inter';
+        font-size: 5vw;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 15vh;
+        padding-left: 10vw;
+        margin-bottom: 0%;
+    }
+    .massiveText {
+        font-size: 350%;
+    }
+    .imagediv {
+        width: 100%;
+        z-index: 2;
+    }
+
+    .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .copyText {
+        font-size: 135%;
+        font-family: 'Lato';
+        font-weight: lighter;
+        text-align: center;
+        width: 70%;
+        padding-left: 25%;
+    }
+
+    .buttonParent {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 10%;
+        gap: 10px; 
+    }
+    .tutorialDiv {
+        width: 50%; 
+        margin-left: 10%;
+        margin-bottom: 25px;
+    }
+    .codeBlock {
+        background-color: #3A3A3A;
+        border-radius: 15px;
+        width: 100%;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        padding-left: 2%;
+    }
 }
 
-.imagediv {
-    width: 100%;
-    z-index: 2;
-}
+/* Small screen */ 
+@media only screen and (max-width: 800px) {
+    .imagediv {
+        width: 0%;
+    }
+    .massiveText {
+        font-size: 300%;
+    }
 
-.image {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover;
-}
+    .copyText {
+        font-size: 135%;
+        font-family: 'Lato';
+        font-weight: lighter;
+        text-align: center;
+        width: 50%;
+        padding-left: 25%;
+    }
 
-.copyText {
-    font-size: 135%;
-    font-family: 'Lato';
-    font-weight: lighter;
-    text-align: center;
-    width: 70%;
-    padding-left: 25%;
-}
+    .titleText {
+        font-family: 'Inter';
+        font-size: 300%;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 15vh;
+        margin-bottom: 0%;
+    }
 
-.buttonParent {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-left: 10%;
-    gap: 10px; 
+    .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .buttonParent {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .tutorialDiv {
+        width: 80%; 
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 25px;
+    }
+    .codeBlock {
+        background-color: #3A3A3A;
+        border-radius: 15px;
+        width: 100%;
+        padding-top: 9%;
+        padding-bottom: 3%;
+        padding-left: 2%;
+    }
 }
 
 .button {
@@ -158,27 +232,8 @@
     text-align: center;
 }
 
-.massiveText {
-    font-size: 350%;
-}
-
 .extraLargeText {
     font-size: 200%;
-}
-
-.tutorialDiv {
-    width: 50%; 
-    margin-left: 10%;
-    margin-bottom: 25px;
-}
-
-.codeBlock {
-    background-color: #3A3A3A;
-    border-radius: 15px;
-    width: 100%;
-    padding-top: 3%;
-    padding-bottom: 3%;
-    padding-left: 2%;
 }
 
 .white {

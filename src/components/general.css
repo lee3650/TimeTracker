@@ -12,13 +12,6 @@
     flex-direction: column;
 }
 
-.leftDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 35vw;
-}
-
 .lightText {
     font-weight: lighter;
 }
@@ -89,4 +82,32 @@
 .blackEmoji {
     color: transparent; 
     text-shadow: 0 0 0 black;
+}
+
+/* Large screen */ 
+@media only screen and (min-width: 801px) {
+    .titleFont {
+        font-size: 3vw;
+    }
+
+    .leftDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 35vw;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .titleFont {
+        font-size: 150%;
+        margin-top: 50px;
+    }
+
+    .leftDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 10vw;
+    }
 }

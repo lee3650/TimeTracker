@@ -116,11 +116,6 @@ export const Homepage = (props) => {
                 <p className='interFont lightText'>
                     Upload the file on the main page, and see total times, streaks, and other stats for each activity you've declared. 
                 </p>
-                <Link onClick={() => window.scroll(0,0)} to='/example' className='cleanLink interFont'>🔍 See an example</Link>
-                <br/>
-                <a href='https://github.com/lee3650/TimeTracker' className='interFont cleanLink'>📖 Read more</a>
-                <br/>
-                <br/>
                 <CodeBlock filename='timetracking.md'>
                     <p className='courierFont white'>
                         Activity: Web development
@@ -172,8 +167,12 @@ export const Homepage = (props) => {
                     <li>Use github to backup and distribute your log file. Access it anywhere and prevent it from being lost.</li>
                 </ol>
                 </p>
+                <Link onClick={() => window.scroll(0,0)} to='/example' className='cleanLink interFont boldText'>🔍 See an example</Link>
+                <br/>
+                <br/>
+                <a href='https://github.com/lee3650/TimeTracker' className='interFont cleanLink boldText'>📖 Read more</a>
             </div>
-        </div>)
+        </div>
     </>
     )
 }
