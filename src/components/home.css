@@ -33,7 +33,7 @@
     }
     .lightText {
         font-weight: lighter;
-        font-size: calc(0.25rem + 1vw);
+        font-size: calc(0.25rem + 0.75vw);
     }
     .massiveText {
         font-size: calc(2vw + 2rem);
@@ -93,7 +93,7 @@
         text-align: center;
         color: white;
         border-radius: 12px;
-        font-size: calc(0.25rem + 1vw);
+        font-size: normal;
         font-family: 'Lato';
         height: 50px;
         width: 200px;
