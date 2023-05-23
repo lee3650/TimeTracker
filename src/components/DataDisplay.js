@@ -2,38 +2,11 @@ import './general.css'
 import ActivityStats from './ActivityStats'
 import { Link } from 'react-router-dom'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useEffect, useState } from 'react';
 
 const DataDisplay = (props) => {
     const data = props.data
     const activities = props.data.stats
     console.log(JSON.stringify(activities))
-
-    const [graphWidth, setGraphWidth]= useState("30%")
-
-    if (graphWidth !== "100%" && window.innerWidth <= 800) {
-        setGraphWidth("100%")
-    }
-
-    useEffect(() => {
-
-        const onResize = () => {
-            if (window.innerWidth <= 800) {
-                setGraphWidth("100%")
-            }
-            else {
-                setGraphWidth("30%")
-            }
-        }
-
-        const cleanupWindowEvent = () => {
-            window.removeEventListener('resize', onResize)
-        }
-
-        window.addEventListener('resize', onResize)
-
-        return cleanupWindowEvent
-    })
 
     return (<><div className='centerDiv fade-in'>
         <div className='top left absolute'>
@@ -44,7 +17,7 @@ const DataDisplay = (props) => {
         </h1>
 
         <p className='courier normalFont'>{data.fileName}</p>
-        <ResponsiveContainer width={graphWidth} aspect={1.2}>
+        <ResponsiveContainer width={'30%'} aspect={1.2} minWidth={300}>
         <BarChart
             data={activities}
             margin={{

@@ -51,7 +51,7 @@ export const Homepage = (props) => {
                             <label htmlFor="file-upload" className='button colorPurple'><p className='textCenter'>Choose file</p></label>
                             <input id='file-upload' type='file' onChange={processData} className='hidden' />
                             <br />
-                            <button className='button colorGreen normalText' onClick={scrollToRef}>How it works</button>
+                            <button className='button colorGreen' onClick={scrollToRef}>How it works</button>
                         </div>
                     </div>
                     <div className='imagediv'>
