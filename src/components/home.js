@@ -143,7 +143,7 @@ export const Homepage = (props) => {
                 <h1 className='massiveText'>
                     What's the point? 
                 </h1>
-                <p className='interFont normalFont'>
+                <p className='interFont normalFont lightText'>
                 I've tried different time tracking apps, 
                 but I prefer the simplicity and ease of editing of plain text files. 
                 <br/>
@@ -158,7 +158,7 @@ export const Homepage = (props) => {
                 <h2 className='extraLargeText'>
                 Tips
                 </h2>
-                <ol className='interFont normalFont'>
+                <ol className='interFont normalFont lightText'>
                     <li>Track a small number of activities. Tracking more than 4 activities takes too much effort for the benefit gained.</li>
                     <br/>
                     <li>Only track things you do on the computer. For things like running or workout out, there are dedicated apps that provide much better analytics and ease of use.</li>

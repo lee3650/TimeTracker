@@ -1,9 +1,10 @@
 export class ActivityData {
-    constructor(startDate, endDate, fileName, stats) {
+    constructor(startDate, endDate, fileName, stats, errors) {
         this.startDate = startDate
         this.endDate = endDate 
         this.fileName = fileName
         this.stats = stats
+        this.errors = errors 
     }
 }
 
@@ -57,26 +58,41 @@ class Day {
 
 export const ParseActivityData = (string, filename) => {
     const startDay = FindFirstDate(string)
+
+    const errors = []
+
+    let startStr = startDay == null ? 'Unknown' : formatDate(startDay)
+
     const endDay = FindLastDate(string) 
 
-    const stats = ParseActivities(string)
+    const endStr = endDay == null ? 'Unknown' : formatDate(endDay)
 
-    return new ActivityData(formatDate(startDay), formatDate(endDay), filename, stats)
+    if (startDay == null || endDay == null) {
+        errors.push('Could not find any date!')
+    }
+
+    const stats = ParseActivities(string, errors)
+
+    return new ActivityData(startStr, endStr, filename, stats, errors)
 }
 
-export const ParseActivities = (string) => {
+export const ParseActivities = (string, errorArray) => {
     const lines = string.split('\n')
 
     const activity_defs = []
 
-    lines.forEach((element) => {
-        if (getLineType(element) === 'activity') {
+    lines.forEach((element, index) => {
+        const lineType = getLineType(element)
+        if (lineType === 'activity') {
             activity_defs.push(parseActivityDefinition(element))
+        }
+        else if (lineType === 'unknown') {
+            errorArray.push(`Could not parse line ${index + 1} "${element}": unknown line type"`)
         }
     });
 
     // days = array of type day 
-    const days = ParseDays(lines)
+    const days = ParseDays(lines, errorArray)
 
     console.log('Parsed activity definitions: ' + JSON.stringify(activity_defs))
     console.log('parsed days: ' + JSON.stringify(days))
@@ -213,6 +229,7 @@ const formatDate = (date) => {
 const activityPattern = /[Aa]ctivity:.*/
 const dayPattern = /###\d\d\d\d\/\d\d\/\d\d/
 const entryPattern = /\d\d?:\d\d[AaPp][Mm].*/
+const commentPattern = /\/\/.*/
 
 const removeComment = (string) => {
     const comment = string.indexOf("//")
@@ -301,6 +318,12 @@ const getLineType = (string) => {
     if (dayPattern.test(string)) { 
         return 'day'
     }
+    if (commentPattern.test(string)) {
+        return 'comment'
+    }
+    if (string.length == 0) {
+        return 'whitespace'
+    }
 
     return 'unknown'
 }
@@ -343,7 +366,7 @@ export const ComputeBestStreak = (string_label, rest_days, days) => {
     return bestStreak 
 }
 
-const ParseDays = (stringArray) => {
+const ParseDays = (stringArray, errorArray) => {
     let curDay = null 
     let timesOnDay = {} 
 
@@ -354,8 +377,11 @@ const ParseDays = (stringArray) => {
             if (curDay !== null) {
                 days.push(new Day(curDay, timesOnDay))
             }
+
             curDay = ParseDay(stringArray[i])
+
             if (curDay == null) {
+                errorArray.push(`Could not parse day entry on line ${i + 1}: "${stringArray[i]}"`)
             }
             timesOnDay = {} 
         }
@@ -363,6 +389,7 @@ const ParseDays = (stringArray) => {
             const entry = ParseActivityEntry(stringArray[i])
 
             if (entry == null) {
+                errorArray.push(`Could not parse activity entry on line ${i + 1}: "${stringArray[i]}"`)
                 continue
             }
 

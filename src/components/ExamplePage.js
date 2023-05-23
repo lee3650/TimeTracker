@@ -12,7 +12,7 @@ const data = {
             name: 'Development', 
             totalTime: 16.8, 
             streak: 7, 
-            bestStreak: 5, 
+            bestStreak: 9, 
             timePerDay: 1.03, 
             bestDayString: 'May 21, 2023, 3.43 hours', 
         }, 
@@ -29,7 +29,7 @@ const data = {
 
 const ExamplePage = (props) => {
     return (<>
-        <DataDisplay data={data} />
+        <DataDisplay data={data}/>
     </>);
 }
 
