@@ -89,6 +89,17 @@
     .titleFont {
         font-size: 3vw;
     }
+    .normalFont {
+        font-size: calc(0.15rem + 1vw);
+    }
+
+    .activityLabel {
+        font-size: calc(0.5rem + 1vw);
+    }
+
+    .activityTitle {
+        font-size: calc(0.5rem + 1.5vw);
+    }
 
     .leftDiv {
         display: flex;

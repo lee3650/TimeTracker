@@ -4,7 +4,7 @@ const CodeBlock = (props) => {
     return (
         <div className='codeBlock relative'>
             {props.children}
-            <p className='inter white absolute right topHigh'>
+            <p className='inter white absolute right topHigh normalFont'>
                 {props.filename}
             </p>
         </div>

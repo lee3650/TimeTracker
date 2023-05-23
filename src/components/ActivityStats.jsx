@@ -31,7 +31,7 @@ const ActivityStats = (props) => {
             <div className={'square color' + getNextColor()}></div>
         </div>
         <div>
-            <h2 className='inter normalText'>
+            <h2 className='inter normalText activityLabel'>
                 {activity.name}
             </h2>
             <ul>

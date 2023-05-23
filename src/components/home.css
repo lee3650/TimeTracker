@@ -24,15 +24,19 @@
 @media only screen and (min-width: 801px) {
     .titleText {
         font-family: 'Inter';
-        font-size: 5vw;
+        font-size: calc(4vw + 1rem);
         font-weight: bold;
         text-align: center;
-        padding-top: 15vh;
-        padding-left: 10vw;
+        margin-top: 20vh;
+        margin-left: 10vw;
         margin-bottom: 0%;
     }
+    .lightText {
+        font-weight: lighter;
+        font-size: calc(0.25rem + 1vw);
+    }
     .massiveText {
-        font-size: 350%;
+        font-size: calc(2vw + 2rem);
     }
     .imagediv {
         width: 100%;
@@ -46,7 +50,7 @@
     }
 
     .copyText {
-        font-size: 135%;
+        font-size: calc(0.5rem + 1vw);
         font-family: 'Lato';
         font-weight: lighter;
         text-align: center;
@@ -75,6 +79,47 @@
         padding-bottom: 3%;
         padding-left: 2%;
     }
+    .extraLargeText {
+        font-size: calc(1rem + 1vw);
+    }
+    .normalFont {
+        font-size: calc(0.15rem + 1vw);
+    }
+
+    .largeText {
+        font-size: calc(0.25rem + 1vw);
+    }
+    .button {
+        text-align: center;
+        color: white;
+        border-radius: 12px;
+        font-size: calc(0.25rem + 1vw);
+        font-family: 'Lato';
+        height: 50px;
+        width: 200px;
+        justify-content: space-between;
+        cursor: pointer;
+        display: inline-block;
+        border: 0px;
+    }
+}
+
+/* Extra large screen */
+@media only screen and (min-width: 2000px) {
+    .button {
+        text-align: center;
+        color: white;
+        border-radius: 12px;
+        font-size: calc(0.25rem + 1vw);
+        font-family: 'Lato';
+        height: 100px;
+        width: 400px;
+        justify-content: space-between;
+        cursor: pointer;
+        display: inline-block;
+        border: 0px;
+    }
+
 }
 
 /* Small screen */ 
@@ -83,7 +128,7 @@
         width: 0%;
     }
     .massiveText {
-        font-size: 300%;
+        font-size: calc(1.5vw + 2rem);
     }
 
     .copyText {
@@ -123,6 +168,16 @@
         margin-right: 10%;
         margin-bottom: 25px;
     }
+    .normalFont {
+        font-size: normal;
+    }
+
+    .largeText {
+        font-size: large;
+    }
+    .extraLargeText {
+        font-size: 200%;
+    }
     .codeBlock {
         background-color: #3A3A3A;
         border-radius: 15px;
@@ -131,20 +186,23 @@
         padding-bottom: 3%;
         padding-left: 2%;
     }
-}
+    .lightText {
+        font-weight: lighter;
+    }
+    .button {
+        text-align: center;
+        color: white;
+        border-radius: 12px;
+        font-size: normal;
+        font-family: 'Lato';
+        height: 50px;
+        width: 200px;
+        justify-content: space-between;
+        cursor: pointer;
+        display: inline-block;
+        border: 0px;
+    }
 
-.button {
-    text-align: center;
-    color: white;
-    border-radius: 12px;
-    font-size: medium;
-    font-family: 'Lato';
-    height: 50px;
-    width: 200px;
-    justify-content: space-between;
-    cursor: pointer;
-    display: inline-block;
-    border: 0px;
 }
 
 .button:hover {
@@ -206,17 +264,9 @@
     font-family: 'Inter';
 }
 
-.lightText {
-    font-weight: lighter;
-}
-
 .boldText {
     font-weight: bold;
     color: black; 
-}
-
-.largeText {
-    font-size: large;
 }
 
 .courierFont {
@@ -230,10 +280,8 @@
 
 .textCenter {
     text-align: center;
-}
-
-.extraLargeText {
-    font-size: 200%;
+    width: 100%;
+    height: 100%;
 }
 
 .white {

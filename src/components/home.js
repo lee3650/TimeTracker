@@ -49,9 +49,9 @@ export const Homepage = (props) => {
                         <p className='copyText'>Track your time declaratively using plain text files. Upload your time data files and visualize them with time tracker. Free and open source, forever.</p>
                         <div className='buttonParent'>
                             <label htmlFor="file-upload" className='button colorPurple'><p className='textCenter'>Choose file</p></label>
-                            <input id='file-upload' type='file' onChange={processData} className='hidden'/>
+                            <input id='file-upload' type='file' onChange={processData} className='hidden' />
                             <br />
-                            <button className='button colorGreen' onClick={scrollToRef}>How it works</button>
+                            <button className='button colorGreen normalText' onClick={scrollToRef}>How it works</button>
                         </div>
                     </div>
                     <div className='imagediv'>
@@ -82,11 +82,11 @@ export const Homepage = (props) => {
                 <p className='interFont lightText'>
                     Declare the activities you're interested in tracking using the syntax “Activity: Activity name”. 
                 </p>
-                <div className='codeBlock relative'>
+                <div className='codeBlock relative normalFont'>
                     <p className='courierFont white'>
                         Activity: Web development
                     </p>
-                    <p className='inter white absolute right topHigh'>
+                    <p className='inter white absolute right topHigh normalFont'>
                         timetracking.md
                     </p>
                 </div>
@@ -97,16 +97,16 @@ export const Homepage = (props) => {
                     First, type the date in the format “### YYYY/MM/DD”. Then, type the name and activity using the format `HH:MM [AM | PM] - HH:MM [AM | PM], activity name`. 
                 </p>
                 <div className='codeBlock relative'>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                         Activity: Web development
                     </p>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                         ### 2023/05/19
                     </p>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                     9:30 AM - 11:30 AM, web development // case insensitive
                     </p>
-                    <p className='inter white absolute right topHigh'>
+                    <p className='inter white absolute right topHigh normalFont'>
                         timetracking.md
                     </p>
                 </div>
@@ -117,25 +117,25 @@ export const Homepage = (props) => {
                     Upload the file on the main page, and see total times, streaks, and other stats for each activity you've declared. 
                 </p>
                 <CodeBlock filename='timetracking.md'>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                         Activity: Web development
                     </p>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                         Activity: write; Rest Days: Mon, Wed // rest days don't affect streak
                     </p>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                         ### 2023/05/19
                     </p>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                     9:30 AM - 11:30 AM, web development // case insensitive
                     </p>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                     11:45 AM - 2:12 PM, write
                     </p>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                     ### 2023/05/18
                     </p>
-                    <p className='courierFont white'>
+                    <p className='courierFont white normalFont'>
                         9:17 AM - 11:15 AM, web development
                     </p>
                 </CodeBlock>
@@ -143,7 +143,7 @@ export const Homepage = (props) => {
                 <h1 className='massiveText'>
                     What's the point? 
                 </h1>
-                <p className='interFont'>
+                <p className='interFont normalFont'>
                 I've tried different time tracking apps, 
                 but I prefer the simplicity and ease of editing of plain text files. 
                 <br/>
@@ -158,19 +158,17 @@ export const Homepage = (props) => {
                 <h2 className='extraLargeText'>
                 Tips
                 </h2>
-                <p>
-                <ol className='interFont'>
+                <ol className='interFont normalFont'>
                     <li>Track a small number of activities. Tracking more than 4 activities takes too much effort for the benefit gained.</li>
                     <br/>
                     <li>Only track things you do on the computer. For things like running or workout out, there are dedicated apps that provide much better analytics and ease of use.</li>
                     <br/>
                     <li>Use github to backup and distribute your log file. Access it anywhere and prevent it from being lost.</li>
                 </ol>
-                </p>
-                <Link onClick={() => window.scroll(0,0)} to='/example' className='cleanLink interFont boldText'>🔍 See an example</Link>
+                <Link onClick={() => window.scroll(0,0)} to='/example' className='cleanLink interFont boldText normalFont'>🔍 See an example</Link>
                 <br/>
                 <br/>
-                <a href='https://github.com/lee3650/TimeTracker' className='interFont cleanLink boldText'>📖 Read more</a>
+                <a href='https://github.com/lee3650/TimeTracker' className='interFont cleanLink boldText normalFont'>📖 Read more</a>
             </div>
         </div>
     </>

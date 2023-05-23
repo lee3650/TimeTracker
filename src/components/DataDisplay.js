@@ -10,13 +10,13 @@ const DataDisplay = (props) => {
 
     return (<><div className='centerDiv fade-in'>
         <div className='top left absolute'>
-            <Link to={'/'} className='cleanLink bold inter'>Home</Link>
+            <Link to={'/'} className='cleanLink bold inter normalFont'>Home</Link>
         </div>
         <h1 className='inter titleFont'>
             {data.startDate + ' - ' + data.endDate}
         </h1>
 
-        <p className='courier'>{data.fileName}</p>
+        <p className='courier normalFont'>{data.fileName}</p>
         <BarChart
             width={500}
             height={400}
@@ -39,7 +39,7 @@ const DataDisplay = (props) => {
         </BarChart>
     </div>
         <div className='leftDiv marginBottom'>
-            <h1 className='inter'>Activities</h1>
+            <h1 className='inter activityTitle'>Activities</h1>
         {activities.map((a, i) => (<ActivityStats activity={a} key={i} />))}
         </div>
     </>);
