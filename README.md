@@ -14,7 +14,7 @@ Start a new *day* with `### YYYY/MM/DD`. Any activity entries must be underneath
 
 Put the oldest day at the bottom and put newer days on top. 
 
-*Activity entries* take the form `HH:MM - HH:MM, activity_name`. 
+*Activity entries* take the form `HH:MM [AM|PM] - HH:MM [AM|PM], activity_name`. 
 
 Example file: 
 

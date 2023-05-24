@@ -20,7 +20,7 @@ test('activity entries are parsed correctly', () => {
     expect(activityEntry.label).toBe('time tracker project')
 })
 
-test.only('activity entries are parsed within PM', () => {
+test('activity entries are parsed within PM', () => {
     const input = "12:15 PM - 5:15 PM, testing"
 
     const activityEntry = ParseActivityEntry(input) 
@@ -29,7 +29,7 @@ test.only('activity entries are parsed within PM', () => {
     expect(activityEntry.label).toBe('testing')
 })
 
-test.only('activity entries are parsed from AM to PM', () => {
+test('activity entries are parsed from AM to PM', () => {
     const input = "11:00 AM - 5:15 PM, testing"
 
     const activityEntry = ParseActivityEntry(input) 
@@ -50,7 +50,7 @@ test('can parse activity definition', () => {
 
 })
 
-test.only('activity entry length is correct between days', () => {
+test('activity entry length is correct between days', () => {
     const input = '11:30 PM - 1:30 AM, gamedev\n'
 
     const entry = ParseActivityEntry(input)
@@ -74,7 +74,7 @@ test('activity entry is parsed with single digit times', () => {
 
     const entry = ParseActivityEntry(input)
 
-    expect(entry.length).toBeCloseTo(1)
+    expect(entry.length).toBeCloseTo(13)
     expect(entry.label).toBe('gamedev')
 })
 

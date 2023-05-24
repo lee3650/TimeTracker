@@ -94,7 +94,7 @@ export const Homepage = (props) => {
                     3. Track activities
                 </h2>
                 <p className='interFont lightText'>
-                    First, type the date in the format “### YYYY/MM/DD”. Then, type the name and activity using the format `HH:MM [AM | PM] - HH:MM [AM | PM], activity name`. 
+                    First, type the date in the format “### YYYY/MM/DD”. Then, type the start and end time and activity name using the format `HH:MM [AM | PM] - HH:MM [AM | PM], activity name`. 
                 </p>
                 <div className='codeBlock relative'>
                     <p className='courierFont white normalFont'>

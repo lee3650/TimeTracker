@@ -207,7 +207,7 @@ const ParseActivity = (activity_def, days) => {
     const curStreak = ComputeStreak(activity_def.label, activity_def.restDays, days)
     const bestStreak = ComputeBestStreak(activity_def.label, activity_def.restDays, days)
 
-    return new ActivityStats(activity_def.label, Number(totalTime).toFixed(2), curStreak, bestStreak, timePerDay, bestDayStr)
+    return new ActivityStats(activity_def.label, Number(Number(totalTime).toFixed(2)), curStreak, bestStreak, timePerDay, bestDayStr)
 }
 
 const formatDate = (date) => {
@@ -321,7 +321,7 @@ const getLineType = (string) => {
     if (commentPattern.test(string)) {
         return 'comment'
     }
-    if (string.length == 0) {
+    if (string.length === 0) {
         return 'whitespace'
     }
 
@@ -518,7 +518,7 @@ const parseTime = (string, prev_meridian) => {
 
     let hour = parseInt(numbers[0])
 
-    if (hour < 12 && meridian == 'pm') {
+    if (hour < 12 && meridian === 'pm') {
         hour += 12 
     }
 

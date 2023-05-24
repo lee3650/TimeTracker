@@ -4,7 +4,7 @@
 }
 
 .homediv {
-    width: 100vw; 
+    width: 98vw; 
     page-break-after: always;
 }
 
@@ -27,7 +27,7 @@
         font-size: calc(4vw + 1rem);
         font-weight: bold;
         text-align: center;
-        margin-top: 20vh;
+        margin-top: 27vh;
         margin-left: 10vw;
         margin-bottom: 0%;
     }

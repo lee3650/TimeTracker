@@ -1,13 +1,33 @@
 import './general.css'
 import ActivityStats from './ActivityStats'
 import { Link } from 'react-router-dom'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import ErrorDisplay from './ErrorDisplay';
 
 const DataDisplay = (props) => {
     const data = props.data
     const activities = props.data.stats
     console.log(JSON.stringify(activities))
+
+    const CustomTooltip = ({ payload, label, active }) => {
+
+        if (!active){
+            return (<></>)
+        }
+
+        return (<div className='custom-tooltip'>
+            <p className='inter normalFont'>
+            {label}
+            </p>
+            <p className='inter lightText smallFont'>
+            {'Total Time: ' + payload[0].payload.totalTime + ' hours'}
+            </p>
+            <p className='inter lightText smallFont'>
+                {`Streak: ${payload[0].payload.streak} days`}
+            </p>
+        </div>
+        )
+    }
 
     return (<><div className='centerDiv fade-in'>
         <div className='top left absolute'>
@@ -32,7 +52,7 @@ const DataDisplay = (props) => {
                 { /*<CartesianGrid strokeDasharray="3 3" />*/}
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip/>}/>
                 <Legend />
                 <Bar dataKey="totalTime" fill="#4A4063" />
                 <Bar dataKey="streak" fill="#5C6B73" />
