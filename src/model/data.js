@@ -161,7 +161,7 @@ const ParseDay = (string) => {
     }
 
     const year = Number(matches[1]) 
-    const month = Number(matches[3]) 
+    const month = Number(matches[3] - 1) 
     const day = Number(matches[5]) 
 
     return new Date(year, month, day)
